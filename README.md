@@ -11,6 +11,9 @@ As a basis, I used the following blog posts:
 
 For a detailed guide, read those blog posts. Here I just sum up the steps shortly.
 
+I tried these steps on an Ubuntu 14.04 machine, but they should work with
+other versions too.
+
 start
 -----
 You bought your VPS. You get an email that contains info how to log in.
