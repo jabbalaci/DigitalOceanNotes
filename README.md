@@ -29,6 +29,8 @@ Create a new user:
 
     # adduser demo
 
+Provide the password of the user (the other pieces of info are not important).
+
 Here my user is called `demo`. The `#` indicates an admin prompt, while the `$`
 is the prompt of a normal user.
 
@@ -63,6 +65,7 @@ time zone
 Set your time zone:
 
     # dpkg-reconfigure tzdata
+    # date
 
 packages
 --------
@@ -101,9 +104,12 @@ test SSH settings
 -----------------
 *!!! Don't log out as root yet !!!* Try to log in as a normal user:
 
-    $ ssh demo@1.2.3.4
+    $ ssh -p 1234 demo@1.2.3.4
 
-Test if you can sudo:
+Since the SSH port was moved in this example from the default, we need to
+specify the new port (`-p` option).
+
+Once in, test if you can sudo:
 
     $ sudo su
 
@@ -160,6 +166,16 @@ I use this script to set up my firewall:
 
     sudo ufw status verbose
 
+Save and run this script, and then *test again if you can log in*! Open a new
+terminal, don't close the current one, and try to log in:
+
+    $ ssh -p 1234 demo@1.2.3.4
+
+If it works, then your firewall settings are good, your SSH port is open. But,
+if your firewall is not configured properly and your SSH port is closed, then
+once you log out, you locked yourself out. So that's why we verified again
+if we can still log in.
+
 useful programs
 ---------------
 Compiler:
@@ -200,6 +216,8 @@ copy your own settings
 ----------------------
 In this repo I collected my dotfiles. It's time to copy them to the server.
 For this, you can use FileZilla for instance with the SFTP protocol.
+Or, even simpler, just clone this repo on your server. See the content
+of the `home/demo` folder.
 
 mc: make backspace jump to parent dir
 -------------------------------------
@@ -227,15 +245,16 @@ Again, I just some up the necessary steps here.
 Switch to root and create a file that you want to use as a swap file:
 
     # cd /
-    # dd if=/dev/zero of=/swapfile1 bs=1G count=2
+    # dd if=/dev/zero of=/swapfile1 bs=1M count=2048
     # ls -al
 
-The file is in the root folder (`/`) and its size is 2 GB (2048 MB).
+The file is in the root folder (`/`) and its size is 2048 MB, i.e. 2 GB.
 
 Secure the swap file:
 
     # chown root:root /swapfile1
     # chmod 0600 /swapfile1
+    # ls -al
 
 Make it a swap file (so far it was just a big, but normal file):
 
