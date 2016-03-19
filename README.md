@@ -26,15 +26,16 @@ Create a new user:
 
     # adduser demo
 
-Here my user is called `demo`. The `#` indicates an admin prompt, while commands
-after `$` are executed without admin privileges.
+Here my user is called `demo`. The `#` indicates an admin prompt, while the `$`
+is the prompt of a normal user.
 
 admin rights to the new user
 ----------------------------
+First let's set your favorite text editor:
 
     # update-alternatives --config editor
 
-Here I set vim as my favorite editor.
+Then launch:
 
     # visudo
 
@@ -95,7 +96,7 @@ Save and reload the settings:
 
 test SSH settings
 -----------------
-!!! Don't log out as root yet !!! Try to log in as a normal user:
+*!!! Don't log out as root yet !!!* Try to log in as a normal user:
 
     $ ssh demo@1.2.3.4
 
@@ -188,6 +189,10 @@ git:
 
     # apt-get install git
 
+htop:
+
+    # apt-get install htop
+
 copy your own settings
 ----------------------
 In this repo I collected my dotfiles. It's time to copy them to the server.
@@ -203,3 +208,55 @@ mc: make backspace jump to parent dir
 Uncomment and edit this line:
 
     CdParentSmart = backspace
+
+add a swap file (optional)
+--------------------------
+Once I bought a VPS with MongoDB preinstalled. This machine had 512 MB RAM
+with no swap at all. It was not enough for MongoDB and when I tried to import
+a dump with `mongorestore`, the server crashed, ran out of memory. After
+adding a swap file MongoDB worked well.
+
+So, how to add a swap file? For this I used this excellent blog post:
+* http://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/
+
+Again, I just some up the necessary steps here.
+
+Switch to root and create a file that you want to use as a swap file:
+
+    # cd /
+    # dd if=/dev/zero of=/swapfile1 bs=1G count=2
+    # ls -al
+
+The file is in the root folder (`/`) and its size is 2 GB (2048 MB).
+
+Secure the swap file:
+
+    # chown root:root /swapfile1
+    # chmod 0600 /swapfile1
+
+Make it a swap file (so far it was just a big, but normal file):
+
+    # mkswap /swapfile1
+
+Activate it:
+
+    # swapon /swapfile1
+
+If you reboot your machine, it's off (not activated). To make it permanent,
+add it to your `/etc/fstab`:
+
+    # vi /etc/fstab
+
+And add this line:
+
+    /swapfile1 none swap sw 0 0
+
+Save and just to test if everything is OK, reboot your machine.
+
+Verify if swap is active:
+
+    $ free
+
+Or:
+
+    $ htop
