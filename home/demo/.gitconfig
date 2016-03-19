@@ -1,0 +1,14 @@
+[alias]
+    mylog = log --pretty=format:'%h - %an, %ar : %s'
+
+    st = status
+    br = branch
+    ci = commit
+    co = checkout
+    df = diff
+    dt = difftool
+[user]
+	email = jabba.laci@gmail.com
+	name = Jabba Laci (VPS)
+[push]
+	default = simple

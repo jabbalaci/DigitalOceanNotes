@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+tmux list-sessions
+echo "# tmux attach -t 0"

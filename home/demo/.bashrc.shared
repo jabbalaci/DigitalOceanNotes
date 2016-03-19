@@ -1,0 +1,87 @@
+#####################
+## common settings ##
+#####################
+
+umask 022
+
+export EDITOR=/usr/bin/vim
+
+export PATH=$PATH:~/bin
+
+alias md='mkdir'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias d='ls -al'
+#alias mc='. /usr/share/mc/bin/mc-wrapper.sh'
+# START: mc-wrapper
+if [ -f /usr/local/libexec/mc/mc-wrapper.sh ]
+then
+    alias mc=". /usr/local/libexec/mc/mc-wrapper.sh"
+else
+    if [ -f /usr/lib/mc/mc-wrapper.sh ]
+    then
+        alias mc=". /usr/lib/mc/mc-wrapper.sh"
+    else
+        echo "error: mc-wrapper.sh not found"
+    fi
+fi
+# END: mc-wrapper
+alias run='chmod u+x'
+alias tailf='tail -f'
+alias cls='clear'
+alias p='python'
+alias p2='python2'
+alias p3='python3'
+alias bpy2='bpython2'
+alias bpy3='bpython3'
+alias ipy='ipython'
+alias ipy3='ipython3'
+alias sagi='sudo apt-get install'
+alias ppwd='/bin/pwd'
+alias top10dirs='du -hsx * | sort -rh | head -10'
+alias top10files='find . -type f -print0 | du -h --files0-from=- | sort -hr | head -n 10'
+mkdir_go()
+{
+if [[ -z "$1" ]]
+then
+    echo "Usage: mdgo <dir>"
+else
+    mkdir $1; cd $1
+fi
+}
+alias mdgo=mkdir_go
+
+alias ydl='youtube-dl'
+alias r='ranger'
+
+# colorize man pages
+# http://unix.stackexchange.com/questions/119/colors-in-man-pages
+#export PAGER=most
+
+# shopt settings (normalize Ubuntu and Manjaro)
+shopt -s cdspell
+shopt -s dotglob
+shopt -s hostcomplete
+shopt -s nocaseglob
+# required for "source .venv":
+shopt -u sourcepath
+
+# https://gist.github.com/insin/1425703
+source ~/.bash_prompt
+
+# http://linuxgazette.net/109/misc/marinov/acd_func.html
+source ~/acd_func.sh
+alias ll="cd --"
+
+# autojump
+# http://www.thinkingmedia.ca/2014/10/how-to-install-autojump-on-ubuntu-14/
+source /usr/share/autojump/autojump.bash
+alias jj="j --stat"
+
+# source my virtualenv functions and aliases
+# https://github.com/jabbalaci/virtualenv-tools
+source ~/virtualenv.sh
+
+# screen needs this to work correctly
+export TERM=xterm
