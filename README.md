@@ -216,7 +216,7 @@ copy your own settings
 ----------------------
 In this repo I collected my dotfiles. It's time to copy them to the server.
 For this, you can use FileZilla for instance with the SFTP protocol.
-Or, even simpler, just clone this repo on your server. See the content
+Or, even simpler, just clone this repo to your server. See the content
 of the `home/demo` folder.
 
 mc: make backspace jump to parent dir
