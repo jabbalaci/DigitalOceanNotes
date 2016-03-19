@@ -113,6 +113,7 @@ if filereadable($HOME."/LIGHT_BACKGROUND")
     "colorscheme proton
 else
     colorscheme elflord     " for dark background
+    "colorscheme advantage     " for dark background
 endif
 
 "To define a mapping which uses the 'mapleader' variable, the special string
