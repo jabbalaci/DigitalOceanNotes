@@ -23,6 +23,18 @@ Log in as root:
 
 You'll have to change your password.
 
+change hostname (optional)
+--------------------------
+When creating a new VPS with Digital Ocean, you can give a name to your server.
+Later you can rename it to something else:
+
+    # echo "do-test" > /etc/hostname
+    # hostname -F /etc/hostname
+
+Verification:
+
+    $ hostname
+
 new user
 --------
 Create a new user:
