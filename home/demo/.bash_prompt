@@ -44,7 +44,6 @@ COLOR_NONE="\[\e[0m\]"
 
 LIGHT_RED="\[\033[1;31m\]"
 LIGHT_GREEN="\[\033[1;32m\]"
-LIGHT_BLUE="\[\033[1;34m\]"
 LIGHT_GRAY="\[\033[0;37m\]"
 DARK_GRAY="\[\033[1;30m\]"
 
@@ -112,10 +111,14 @@ function set_prompt_symbol () {
 
 # Determine active Python virtualenv details.
 function set_virtualenv () {
-  if test -z "$VIRTUAL_ENV" ; then
-      PYTHON_VIRTUALENV=""
-  else
-      PYTHON_VIRTUALENV="${BOLD_YELLOW}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
+  PYTHON_VIRTUALENV=""
+
+  if [ -n "$VIRTUAL_ENV" ]; then
+      PYTHON_VIRTUALENV="${BOLD_BLUE}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
+  fi
+
+  if [ -n "$CONDA_ENV_PATH" ]; then
+      PYTHON_VIRTUALENV="${BOLD_BLUE}[`basename \"$CONDA_ENV_PATH\"`]${COLOR_NONE} "
   fi
 }
 
@@ -145,7 +148,7 @@ function set_bash_prompt () {
   if $I_HAVE_LIGHT_BACKGROUND ; then
     PS1="${PYTHON_VIRTUALENV}${DARK_GRAY}\u@\h [\t] ${BOLD_PURPLE}\w${COLOR_NONE} ${BRANCH}${PROMPT_SYMBOL} "
   else
-    PS1="${PYTHON_VIRTUALENV}${LIGHT_BLUE}\u@\h [\t] ${BOLD_PURPLE}\w${COLOR_NONE} ${BRANCH}${PROMPT_SYMBOL} "
+    PS1="${PYTHON_VIRTUALENV}${LIGHT_GREEN}\u@\h [\t] ${BOLD_PURPLE}\w${COLOR_NONE} ${BRANCH}${PROMPT_SYMBOL} "
   fi
 
   # add a separator line
