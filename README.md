@@ -112,6 +112,11 @@ Save and reload the settings:
 
     # reload ssh
 
+If you use a newer version of Ubuntu, this reload method may not work. In that
+case try this:
+
+    $ sudo systemctl restart ssh
+
 test SSH settings
 -----------------
 *!!! Don't log out as root yet !!!* Try to log in as a normal user:
