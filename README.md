@@ -257,7 +257,7 @@ adding a swap file MongoDB worked well.
 So, how to add a swap file? For this I used this excellent blog post:
 * http://www.cyberciti.biz/faq/linux-add-a-swap-file-howto/
 
-Again, I just some up the necessary steps here.
+Again, I just sum up the necessary steps here.
 
 Switch to root and create a file that you want to use as a swap file:
 
