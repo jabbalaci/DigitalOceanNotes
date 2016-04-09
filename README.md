@@ -299,3 +299,38 @@ Verify if swap is active:
 Or:
 
     $ htop
+
+send email from the terminal (optional)
+---------------------------------------
+I have several scripts running on my DO machine. Sometimes I would like to get
+an email notification when one of them is finished. Install these packages:
+
+    $ sudo aptitude install sendmail
+    $ sudo aptitude install mailutils
+
+Now try to send emails to you. With subject and body:
+
+    echo "this is the body" | mail -s "this is the subject" "your@email.address"
+
+Or with just a subject:
+
+    mailx -s "This is all she wrote" < /dev/null "your@email.address"
+
+I sent my test emails to my Gmail address and they landed in the Spam folder.
+
+You may have the problem that sending emails this way takes a lot of time,
+around a minute or so. To speed things up, edit the file `/etc/hosts` and edit
+the beginning of the file. My new content looks like this:
+
+    127.0.0.1    localhost localhost.localdomain do-test
+    127.0.1.1    do-test
+
+Where `do-test` is the hostname of my DO machine. After this restart sendmail:
+
+    $ sudo /etc/init.d/sendmail restart
+
+Now if you try to send emails, they will be delivered immediately. But they still land
+in your Spam folder (if you use Gmail). Here is how to have them in your Inbox:
+find the email in your Spam folder, open it, and on the right side select
+"Filter messages like this". Here you can select "Never send it to Spam". Now
+they will arrive at your Inbox.
