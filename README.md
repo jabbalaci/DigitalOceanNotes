@@ -334,3 +334,13 @@ in your Spam folder (if you use Gmail). Here is how to have them in your Inbox:
 find the email in your Spam folder, open it, and on the right side select
 "Filter messages like this". Here you can select "Never send it to Spam". Now
 they will arrive at your Inbox.
+
+ssh login is very slow (optional)
+---------------------------------
+On my Digital Ocean VPS ssh connection has become very slow. After typing my password
+I had to wait a minute or two to get the prompt. Here is a solution: edit the file
+`/etc/ssh/sshd_config` and uncomment these two lines (by default they are in comments):
+
+    GSSAPIAuthentication no
+    GSSAPICleanupCredentials yes
+
