@@ -262,10 +262,10 @@ Again, I just sum up the necessary steps here.
 Switch to root and create a file that you want to use as a swap file:
 
     # cd /
-    # dd if=/dev/zero of=/swapfile1 bs=1M count=2048
+    # dd if=/dev/zero of=/swapfile1 bs=1M count=4096
     # ls -al
 
-The file is in the root folder (`/`) and its size is 2048 MB, i.e. 2 GB.
+The file is in the root folder (`/`) and its size is 4096 MB, i.e. 4 GB.
 
 Secure the swap file:
 
@@ -299,6 +299,16 @@ Verify if swap is active:
 Or:
 
     $ htop
+
+create a bigger swap file (optional)
+------------------------------------
+If the swap file is too small and you want to create a bigger one, then
+first you need to switch it off:
+
+    # swapoff /swapfile1
+
+Make sure that it's off using the command `free` or `htop`. Then follow
+the steps in the previous paragraph but this time create a bigger swap file.
 
 send email from the terminal (optional)
 ---------------------------------------
@@ -335,8 +345,11 @@ find the email in your Spam folder, open it, and on the right side select
 "Filter messages like this". Here you can select "Never send it to Spam". Now
 they will arrive at your Inbox.
 
-ssh login is very slow (optional)
----------------------------------
+Troubleshooting
+===============
+
+ssh login is very slow
+----------------------
 On my Digital Ocean VPS ssh connection has become very slow. After typing my password
 I had to wait a minute or two to get the prompt. Here is a solution: edit the file
 `/etc/ssh/sshd_config` and uncomment these two lines (by default they are in comments):
@@ -344,3 +357,16 @@ I had to wait a minute or two to get the prompt. Here is a solution: edit the fi
     GSSAPIAuthentication no
     GSSAPICleanupCredentials yes
 
+the mongod process crashed
+--------------------------
+I have the cheapest Digital Ocean VPS that has only 512 MB RAM. For MongoDB it's very
+little... First I created a swap file whose size was 2 GB. It was enough for a while
+but as my database grew bigger and bigger, MongoDB required more and more RAM and once
+it ran out of memory. I just noticed that MongoDB stopped :( In its log file
+(`/var/log/mongodb/mongod.log`) I didn't find any error. It turned out that the mongod
+process was killed by the OS and the error message about it can be found in the file
+`/var/log/syslog`. The swap file got full and the OS killed the mongod process.
+
+As a temporary solution, I increased the size of the swap file from 2 GB to 4 GB. It
+will work for a while but sooner or later I will have to move to a VPS that has much
+more RAM.
