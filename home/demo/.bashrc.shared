@@ -55,6 +55,12 @@ alias mdgo=mkdir_go
 alias ydl='youtube-dl'
 alias r='ranger'
 
+alias ..="cd .."
+alias ...="cd ..; cd .."
+alias ....="cd ..; cd ..; cd .."
+alias .....="cd ..; cd ..; cd ..; cd .."
+alias ......="cd ..; cd ..; cd ..; cd ..; cd .."
+
 # colorize man pages
 # http://unix.stackexchange.com/questions/119/colors-in-man-pages
 #export PAGER=most
