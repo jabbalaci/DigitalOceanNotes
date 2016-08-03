@@ -10,3 +10,6 @@ the notes were updated for Ubuntu 16.04. Both versions are available:
 
 * [notes for Ubuntu 14.04](ubuntu_14_04.md)
 * [notes for Ubuntu 16.04](ubuntu_16_04.md)
+
+If you find a mistake or you have an idea how to extend the notes,
+let me know (indicate it as an issue).
