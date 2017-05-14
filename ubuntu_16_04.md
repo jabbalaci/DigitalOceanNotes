@@ -170,6 +170,9 @@ I use this script to set up my firewall:
     sudo ufw reset
     sudo ufw disable
 
+    # if you want to block an IP address, put it to the top
+    # sudo ufw deny from 5.6.7.8 to any
+
     # my SSH is here
     sudo ufw allow 1234/tcp
     # say you have a webapp on port 9000 that you want to open
