@@ -201,28 +201,23 @@ Compiler:
 
     # aptitude install build-essential
 
-Python:
-
-    # aptitude install python-pip python-dev
-    # pip install virtualenv
-    # pip install pip -U
-
 pip3:
 
     # apt install python3-pip
     # pip3 -V
     # pip3 install pip -U
+    # pip3 install virtualenv
 
 tmux:
 
     # apt install tmux
 
-To install tmux from source, see <https://goo.gl/ZAtGhY>.
+My config file: <https://github.com/jabbalaci/dotfiles/blob/master/.tmux.conf>
 
-autojump:
+autojump ([what's this](https://github.com/wting/autojump)):
 
     # apt install autojump
-
+    
 mc:
 
     # apt install mc
